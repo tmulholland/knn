@@ -5,41 +5,44 @@ class knn(object):
 
     """
 
-    def __init__(self):
+    def __init__(self, ):
 
-        ## decide which algorithm to compute distance
-        self.doCPU = True
-        self.doGPU = True
+        ## The 'k' in k-nearest-neighbors
+        self.k = 3
+
+        ## decide which processing unit(s) to compute distance
+        self.procList = ['CPU',] #'GPU',]
+                         
 
         ## dictionary of distances [CPU array and GPU array]
-        self.distDict = dict.fromkeys(['CPU','GPU'])
+        self.distDict = dict.fromkeys(self.procList)
 
-    def cpuDist():
+    def cpuDist(self):
         
-        self.distDict['CPU'] = [np.sum((self.testPt-self.inData[n,:])**2) 
+        self.distDict['CPU'] = [np.sum((self.testPt-self.data[n,:])**2) 
                                 for n in range(self.nData)]
 
-    def getPred(k,testPt,inData,inClass):
+    def getPred(self):
         """ knn class prediction from set of data with classes and a testPoint
         k = number of nearest neighbors to consider
         testPt = features of data you want to classify
         inData = set of data to compare testPoint to
         inClass = classes that correspond to inData """
 
-        self.nData = len(self.inClass)
+        self.nData = len(self.dataCl)
         
         ## compute distance array with CPU (brute force)
-        if self.doCPU:
+        if 'CPU' in self.procList:
             self.cpuDist()
 
-        for Key in distDict.Keys():
-            distances = distDict[Key]
+        for Key in self.procList:
+            distances = self.distDict[Key]
             indices = np.argsort(distances)
 
-            classes = [inClass[indices[index]] for index in range(k)]
+            classes = [self.dataCl[indices[index]] for index in range(self.k)]
         
             ## very simple prediction 
             ## takes most frequent class of kth nearst neighbor
             classPred = np.argmax(np.bincount(classes))
         
-            print classPred
+        return classPred

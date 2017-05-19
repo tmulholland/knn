@@ -17,21 +17,24 @@ data = data[:, :-1]
 nPts = len(data)
 
 knn = knn.knn()
-errorRate = 0
 
-start_time = time.time()
-for point in range(1,nPts-1):
+for proc in ['CPU','GPU']:
+    errorRate = 0
+    knn.procList = [proc]
+    start_time = time.time()
+    for point in range(1,nPts-1):
 
-    dataPoint = data[point]
+        dataPoint = data[point]
 
-    knn.data = np.append(data[:][0:point],data[:][point+1:nPts],axis=0)
-    knn.dataCl = np.append(dataCl[:][0:point],dataCl[:][point+1:nPts],axis=0)
-    knn.testPt = dataPoint 
+        knn.data = np.append(data[:][0:point],data[:][point+1:nPts],axis=0)
+        knn.dataCl = np.append(dataCl[:][0:point],dataCl[:][point+1:nPts],axis=0)
+        knn.testPt = dataPoint 
     
-    result = knn.getPred()
+        result = knn.getPred()
+        
+        errorRate+=float(result==dataCl[point])
 
-    errorRate+=float(result==dataCl[point])
-
-print("--- %s seconds ---" % (time.time() - start_time))
-errorRate = errorRate/(nPts-2)
-print("-- classified %s percent correct --") % round(errorRate*100,3)
+    print '******* Result of using '+proc+' *******'
+    print("--- %s seconds to run  ---" % round(time.time() - start_time,3))
+    errorRate = errorRate/(nPts-2)
+    print("--- %s percent correct ---") % round(errorRate*100,3)

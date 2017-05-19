@@ -9,8 +9,9 @@ def doFeatureScaling(data):
     ## rescale features 
     for feature in range(len(data[0][:])):
         for datapoint in range(len(data[:,1])):
-            theMax = max(data[:,feature])
-            data[datapoint,feature]*=1./theMax
+            Mean = data[:,feature].mean()
+            Std = data[:,1].std()
+            data[datapoint,feature] = (data[datapoint,feature]-Mean)/Std
 
 ## main script
 ## Data (were modified) downloaded from here:
@@ -39,16 +40,14 @@ if doScaling:
 ## classification
 dataCl = data[:,-1]
 
-## attributes
+## attributes (skim off index and classification)
 data = data[:, 1:-1]
 
 
 nPts = len(data)
 
-## for large datasets,
-## generally seem to get better classification if k is larger
 knn = knn.knn()
-knn.k = 10
+knn.k = 3
 
 pretxt = str(nPoints)+" training data examples with "+str(len(data[0]))+" features"
 print len(pretxt)*'*'
@@ -65,6 +64,7 @@ for proc in procList:
 
         dataPoint = data[point]
 
+        ## subtract off test point
         knn.data = np.append(data[:][0:point],data[:][point+1:nPts],axis=0)
         knn.dataCl = np.append(dataCl[:][0:point],dataCl[:][point+1:nPts],axis=0)
         knn.testPt = dataPoint 

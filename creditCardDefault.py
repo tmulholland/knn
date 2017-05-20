@@ -7,7 +7,7 @@ def doFeatureScaling(data):
     Get about a 5-6% increase in classification success rate
     """
     ## rescale features 
-    for feature in range(len(data[0][:])):
+    for feature in range(len(data[0][:-1])):
         for datapoint in range(len(data[:,1])):
             Mean = data[:,feature].mean()
             Std = data[:,1].std()
@@ -22,15 +22,16 @@ procList = ['CPU','GPU']
 rateDict = dict.fromkeys(procList)
 
 ## number of training points (max=30000)
-nPoints = 1000
+nPoints = 30000
 
-doScaling = False ## scaling already done in  preprocessing of data
+doScaling = False ## scaling already done in preprocessing of data
 
 ## last column is classification, others are attributes
 data = np.genfromtxt('CreditDefaultData.csv', delimiter=',',dtype='f')
 
-## first 2 lines are descriptions
-data = data[2:nPoints]
+## first 2 lines are descriptions (not if using preprocessed data)
+#data = data[2:nPoints]
+data = data[:nPoints]
 
 if doScaling:
     doFeatureScaling(data)
@@ -47,7 +48,7 @@ data = data[:, 1:-1]
 nPts = len(data)
 
 knn = knn.knn()
-knn.k = 3
+knn.k = 4
 
 pretxt = str(nPoints)+" training data examples with "+str(len(data[0]))+" features"
 print len(pretxt)*'*'
@@ -70,7 +71,7 @@ for proc in procList:
         knn.testPt = dataPoint 
     
         result = knn.getPred()
-        
+
         errorRate+=float(result==dataCl[point])
 
     timeToRun = time.time() - start_time 

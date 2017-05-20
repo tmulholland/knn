@@ -5,6 +5,9 @@ from pycuda.compiler import SourceModule
 
 class knn(object):
     """ k-nearest-neighbor classifier to test CUDA performace increase over CPU
+    
+    Could make this a much better classifier.
+    However, purpose was to compare GPU and CPU speed performance
 
     """
 

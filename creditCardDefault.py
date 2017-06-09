@@ -22,7 +22,7 @@ procList = ['CPU','GPU']
 rateDict = dict.fromkeys(procList)
 
 ## number of training points (max=30000)
-nPoints = 30000
+nPoints = 3000
 
 doScaling = False ## scaling already done in preprocessing of data
 
@@ -50,17 +50,17 @@ nPts = len(data)
 knn = knn.knn()
 knn.k = 4
 
-pretxt = str(nPoints)+" training data examples with "+str(len(data[0]))+" features"
-print len(pretxt)*'*'
-print len(pretxt)*'*'
-print "Credit card default prediction"
+pretxt = str(nPoints)+" training data examples with "+str(len(data[0]))+" features \n"
+print "# Credit card default prediction \n"
 print pretxt
 
+print "| Processor | Runtime | Correctly predicted | "
+print "| ------------- |:----------------:| ---------------:|"
 for proc in procList:
     errorRate = 0
     knn.procList = [proc]
     start_time = time.time()
-    print '********** Result of using '+proc+' **********'
+
     for point in range(1,nPts-1):
 
         dataPoint = data[point]
@@ -88,14 +88,12 @@ for proc in procList:
             timeUnit = ' days'
     timeToRun = round(timeToRun,3)
 
-    print '--- '+str(timeToRun) +timeUnit+' to run  ---'
     errorRate = errorRate/(nPts-2)
-    print '--- '+ str( round(errorRate*100,3)) + ' percent correctly predicted ---' 
+    print "| "+proc+" | "+str(timeToRun) +timeUnit+" | "+ str( round(errorRate*100,2)) + " percent |"
+
 
 if ( 'GPU' in procList and 'CPU' in procList):
     perfIncrease = round(rateDict['CPU']/rateDict['GPU'],1)
-    st = '****** GPU processing was '+str(perfIncrease)+' times faster ******'
+    st = '\n### GPU processing was '+str(perfIncrease)+' times faster'
 
-    print len(st)*'*'
     print st
-    print len(st)*'*'

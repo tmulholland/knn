@@ -1,13 +1,10 @@
-# Breast Cancer prediction
+# Breast Cancer prediction 
 
-
-699 training data examples with 9 features
-
+699 training data examples with 9 features 
 
 | Processor | Runtime | correctly predicted | 
 | ------------- |:----------------:| ---------------:|
-| CPU | 4.085 seconds | 96.56 | 
-| GPU | 1.01 seconds | 96.56 | 
-
+| CPU | 4.022 seconds | 96.56 percent |
+| GPU | 1.014 seconds | 96.56 percent |
 
 ### GPU processing was 4.0 times faster

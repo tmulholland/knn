@@ -2,6 +2,7 @@ import numpy as np
 import pycuda.driver as cuda
 import pycuda.autoinit
 from pycuda.compiler import SourceModule
+from collections import Counter
 
 class knn(object):
     """ k-nearest-neighbor classifier to test CUDA performace increase over CPU
@@ -101,9 +102,9 @@ class knn(object):
             indices = np.argsort(distances)
 
             classes = [self.dataCl[indices[index]] for index in range(self.k)]
-        
+
             ## very simple prediction 
             ## takes most frequent class of kth nearst neighbor
-            classPred = np.argmax(np.bincount(classes))
-        
+            classPred = Counter(classes).most_common(1)[0][0]
+
         return classPred

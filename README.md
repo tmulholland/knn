@@ -30,3 +30,14 @@
 | GPU | 1.014 seconds | 96.56 percent |
 
 ### GPU processing was 4.0 times faster
+
+# Phishing prediction 
+
+5000 training data examples with 30 features 
+
+| Processor | Runtime | Correctly predicted | 
+| ------------- |:----------------:| ---------------:|
+| CPU | 5.049 minutes | 95.76 percent |
+| GPU | 12.488 seconds | 95.76 percent |
+
+### GPU processing was 24.3 times faster

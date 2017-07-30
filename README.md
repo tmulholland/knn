@@ -3,12 +3,18 @@
 2013
 ### Enter player name (enter -1 to run over all players)
 Zach Ertz
+ 
+ 
 The 4 nearest neighbors in cluster are:
+ 
 Tyler Eifert
+ 
 Joseph Fauria
+ 
 Matt Furstenburg
+ 
 Chris Gragg
-
+ 
 # Credit card default prediction 
 
 3000 training data examples with 23 features 

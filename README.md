@@ -7,12 +7,9 @@ Zach Ertz
  
 The 4 nearest neighbors in cluster are:
  
-Tyler Eifert
- 
-Joseph Fauria
- 
-Matt Furstenburg
- 
+Tyler Eifert, 
+Joseph Fauria, 
+Matt Furstenburg, 
 Chris Gragg
  
 # Credit card default prediction 

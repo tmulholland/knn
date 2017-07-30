@@ -1,10 +1,10 @@
 # NFL draft cluster
-## Enter draft year from 1999-2015 (enter -1 to run over all drafts)
+##### Enter draft year from 1999-2015 (enter -1 to run over all drafts)
 ### 2013
-## Enter player name (enter -1 to run over all players)
+##### Enter player name (enter -1 to run over all players)
 ### Zach Ertz
  
-The 4 nearest neighbors in cluster are:
+##### The 4 nearest neighbors in cluster are:
  
 ### Tyler Eifert, Joseph Fauria, Matt Furstenburg, Chris Gragg
  

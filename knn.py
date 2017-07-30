@@ -80,6 +80,27 @@ class knn(object):
 
         self.distDict['GPU'] = distances
 
+    def getCluster(self):
+        """ returns the k-closest neighbors
+        good for clustering, not making a classification
+        """
+
+        self.nData = np.array(len(self.dataCl),'i')
+        
+        ## compute distance array with CPU (brute force)
+        if 'CPU' in self.procList:
+            self.cpuDist()
+
+        ## compute distance array with GPU
+        if 'GPU' in self.procList:
+            self.gpuDist()
+
+        for Key in self.procList:
+            distances = self.distDict[Key]
+            indices = np.argsort(distances)
+
+        return [self.dataCl[indices[index]] for index in range(self.k)]
+
     def getPred(self):
         """ knn class prediction from set of data with classes and a testPoint
         k = number of nearest neighbors to consider
